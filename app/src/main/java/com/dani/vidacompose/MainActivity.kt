@@ -1,4 +1,4 @@
-
+package id.vida.sampleapp.ui
 
 import android.app.Activity
 import android.content.Context
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
                         livenessResult =
                             "Success - Liveness Score: ${response.livenessScore} Image Manipulation Score: ${response.manipulationScore}"
                         transactionId =
-                            "SDK Version: ${livenessDetection?.sdkVersion} Transaction ID: ${response.transactionId}"
+                            "SDK Version: ${livenessDetection?.getSDKVersion()} Transaction ID: ${response.transactionId}"
                     },
                     { errorCode, errorMessage, response ->
                         imageBitmap =
@@ -180,9 +180,5 @@ class MainActivity : ComponentActivity() {
         } catch (e: VIDAException) {
             Toast.makeText(context, "Liveness failed: ${e.message}", Toast.LENGTH_SHORT).show()
         }
-
     }
 }
-
-
-
