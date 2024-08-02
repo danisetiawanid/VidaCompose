@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
@@ -49,19 +50,27 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun LivenessScreen() {
-        val livenessDetection: VidaLiveness? = null
         val context = LocalContext.current
         var imageBitmap by remember { mutableStateOf<Bitmap?>(null) }
         var livenessResult by remember { mutableStateOf("") }
         var transactionId by remember { mutableStateOf("") }
         var activeLiveness by remember { mutableStateOf(false) }
+        var livenessDetection by remember { mutableStateOf<VidaLiveness?>(null) }
 
         Column(
             modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            imageBitmap?.let {
+                Image(bitmap = it.asImageBitmap(), contentDescription = "Liveness Result")
+            }
+
+            Text(text = livenessResult)
+            Text(text = transactionId)
+
             Button(onClick = {
-                startLiveness(
+                livenessDetection = startLiveness(
                     context,
                     CameraType.FRONT,
                     KeyConstant.API_KEY_FRONT,
@@ -79,7 +88,7 @@ class MainActivity : ComponentActivity() {
                         livenessResult =
                             "Success - Liveness Score: ${response.livenessScore} Image Manipulation Score: ${response.manipulationScore}"
                         transactionId =
-                            "SDK Version: ${livenessDetection?.getSDKVersion()} Transaction ID: ${response.transactionId}"
+                            "SDK Version: ${livenessDetection?.sdkVersion} Transaction ID: ${response.transactionId}"
                     },
                     { errorCode, errorMessage, response ->
                         imageBitmap =
@@ -96,7 +105,6 @@ class MainActivity : ComponentActivity() {
                             "Code: $errorCode $errorMessage : LIVENESS SCORE: ${response.livenessScore} : Image Manipulation Score ${response.manipulationScore}"
                         transactionId = "Transaction ID: ${response.transactionId}"
                     })
-                livenessDetection?.release()
             }) {
                 Text("Start Liveness")
             }
@@ -107,13 +115,6 @@ class MainActivity : ComponentActivity() {
             )
 
             Text(text = "Active Liveness: $activeLiveness")
-
-            imageBitmap?.let {
-                Image(bitmap = it.asImageBitmap(), contentDescription = "Liveness Result")
-            }
-
-            Text(text = livenessResult)
-            Text(text = transactionId)
         }
     }
 
@@ -125,8 +126,7 @@ class MainActivity : ComponentActivity() {
         activeLiveness: Boolean,
         onSuccess: (VidaLivenessResponse) -> Unit,
         onError: (Int, String, VidaLivenessResponse) -> Unit
-
-    ) {
+    ): VidaLiveness? {
         var livenessDetection: VidaLiveness? = null
         val livenessRequest = VidaLivenessRequest().apply {
             this.apiKey = apiKey
@@ -180,5 +180,6 @@ class MainActivity : ComponentActivity() {
         } catch (e: VIDAException) {
             Toast.makeText(context, "Liveness failed: ${e.message}", Toast.LENGTH_SHORT).show()
         }
+        return livenessDetection
     }
 }
