@@ -1,4 +1,4 @@
-package id.vida.sampleapp.ui
+package com.dani.vidacompose
 
 import android.app.Activity
 import android.content.Context
@@ -47,7 +47,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
     @Composable
     fun LivenessScreen() {
         val context = LocalContext.current
@@ -65,10 +64,8 @@ class MainActivity : ComponentActivity() {
             imageBitmap?.let {
                 Image(bitmap = it.asImageBitmap(), contentDescription = "Liveness Result")
             }
-
             Text(text = livenessResult)
             Text(text = transactionId)
-
             Button(onClick = {
                 livenessDetection = startLiveness(
                     context,
@@ -117,7 +114,6 @@ class MainActivity : ComponentActivity() {
             Text(text = "Active Liveness: $activeLiveness")
         }
     }
-
     private fun startLiveness(
         context: Context,
         cameraType: CameraType,
@@ -147,16 +143,16 @@ class MainActivity : ComponentActivity() {
                 object : VidaLivenessListener {
                     override fun onSuccess(response: VidaLivenessResponse) {
                         onSuccess(response)
+                        livenessDetection?.release()
                     }
-
                     override fun onError(
                         errorCode: Int,
                         errorMessage: String,
                         response: VidaLivenessResponse
                     ) {
                         onError(errorCode, errorMessage, response)
+                        livenessDetection?.release()
                     }
-
                     override fun onInitialized() {
                         livenessDetection?.startDetection()
                     }
