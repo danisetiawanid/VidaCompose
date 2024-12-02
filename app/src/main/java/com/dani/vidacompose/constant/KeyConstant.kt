@@ -1,7 +1,6 @@
 package com.dani.vidacompose.constant
 
 object KeyConstant {
-    // Please reach out to vida support team for the keys
-    const val API_KEY_FRONT: String = "RgvDWiw7bx4pc4vI"
-    const val LICENSE_KEY_FRONT: String = "a5d48067-b480-586c-b3b3-8bbdab0154f6"
+    const val API_KEY_FRONT: String = "GGqicChZbB5X3Xw8"
+    const val LICENSE_KEY_FRONT: String = "7ea3197d-f813-59c8-96c2-2497fee34569"
 }

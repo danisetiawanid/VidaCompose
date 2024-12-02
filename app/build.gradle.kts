@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "id.vida.sampleApp"
+        applicationId = "id.bni.wondr.sit"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -64,7 +64,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation("id.vida:liveness-sandbox:1.6.4")
-    implementation("com.google.mlkit:face-detection:16.1.6")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

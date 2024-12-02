@@ -18,7 +18,7 @@
         android:theme="@style/Theme.VidaCompose"
         tools:targetApi="31">
         <activity
-            android:name="id.vida.sampleapp.ui.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.VidaCompose">
@@ -29,7 +29,8 @@
             </intent-filter>
         </activity>
         <meta-data android:name="vida_activation_key"
-            android:value="bktI3K2gRENZ7x8yrw/RPma+eBWPmQTdEpPAw0hPbQENyOH/E6oOVyY+lK4XjWXMJDZo7Igg+pEKmPB+hquvYv1ASZnflVwaq+p2xFoxwMPohAEbEWqHjlpTxXXB9N1LZr54FY+ZBN0Sk8DDSE9tAQ3I4f8Tqg5XJj6UrheNZcwkNmjsiCD6kQqY8H6Gq69i7zm9YLUGcstrSaq7mQNVThWHYokZcknw4GxBmcWlU7c=" />
+            android:value="5r59h0Zk30OeK2yTNlniCVSsBgm4y9E7ePN/J8svEHczZuKwFmyYUCH9w1ovlvWp7C8cT2ifhWJc6d/1TP1Ldr5pwVpc+yp2YBf++JvGSuabqm6WqVeBOTOL66/si4a2VKwGCbjL0Tt4838nyy8QdzNm4rAWbJhQIf3DWi+W9ansLxxPaJ+FYlzp3/VM/Ut2sSqTtmLRL9n8hClNYEqnsxWHYokZcknw4GxBmcWlU7c=" />
+
     </application>
 
 </manifest>
